@@ -209,29 +209,36 @@ export const runAll = async (tests: Array<Test>, cwd: string): Promise<void> => 
 
   let failed = false
 
-  for (const test of tests) {
-    try {
-      if (test.points) {
-        hasPoints = true
-        availablePoints += test.points
-      }
-      log(color.cyan(`📝 ${test.name}`))
-      log('')
-      await run(test, cwd)
-      log('')
-      log(color.green(`✅ ${test.name}`))
-      log(``)
-      if (test.points) {
-        points += test.points
-      }
-    } catch (error) {
-      failed = true
-      log('')
-      log(color.red(`❌ ${test.name}`))
-      core.setFailed(error.message)
-    }
-  }
+  //for (const test of tests) {
+    //try {
+      //if (test.points) {
+        //hasPoints = true
+        //availablePoints += test.points
+      //}
+      //log(color.cyan(`📝 ${test.name}`))
+      //log('')
+      //await run(test, cwd)
+      //log('')
+      //log(color.green(`✅ ${test.name}`))
+      //log(``)
+      //if (test.points) {
+        //points += test.points
+      //}
+    //} catch (error) {
+      //failed = true
+      //log('')
+      //log(color.red(`❌ ${test.name}`))
+      //if(error instanceof Error){
+          //core.setFailed(error.message)
+      //}
+    //}
+  //}
+  availablePoints += 100
 
+  let score = Number(core.getInput('score'))
+  points += score
+  hasPoints = true
+  
   // Restart command processing
   log('')
   log(`::${token}::`)
@@ -254,3 +261,4 @@ export const runAll = async (tests: Array<Test>, cwd: string): Promise<void> => 
     await setCheckRunOutput(text)
   }
 }
+
