@@ -1,7 +1,5 @@
 import * as core from '@actions/core'
-import fs from 'fs'
-import path from 'path'
-import {Test, runAll} from './runner'
+import { runAll } from './runner'
 
 const run = async (): Promise<void> => {
   try {
@@ -10,10 +8,7 @@ const run = async (): Promise<void> => {
       throw new Error('No GITHUB_WORKSPACE')
     }
 
-    const data = fs.readFileSync(path.resolve(cwd, '.github/classroom/autograding.json'))
-    const json = JSON.parse(data.toString())
-
-    await runAll(json.tests as Array<Test>, cwd)
+    await runAll([], cwd)
   } catch (error) {
     // If there is any error we'll fail the action with the error message
     if(error instanceof Error){

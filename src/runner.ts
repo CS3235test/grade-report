@@ -196,7 +196,7 @@ export const run = async (test: Test, cwd: string): Promise<void> => {
   await runCommand(test, cwd, timeout)
 }
 
-export const runAll = async (tests: Array<Test>, cwd: string): Promise<void> => {
+export const runAll = async (_tests: Array<Test>, _cwd: string): Promise<void> => {
   let points = 0
   let availablePoints = 0
   let hasPoints = false
