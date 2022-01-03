@@ -9,6 +9,9 @@ inputs:
       by replacing this token with a user token which has write-access to your repository. 
       Note that the token will be accessible to all repository collaborators.
     default: ${{ github.token }}
+  score:
+    description: Score to report.
+    default: "0"
 runs:
-  using: "node12"
+  using: "node16"
   main: "./dist/index.js"
