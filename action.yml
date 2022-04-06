@@ -12,6 +12,9 @@ inputs:
   score:
     description: Score to report.
     default: "0"
+  fullscore:
+    description: Total number of points.
+    default: "100"
 runs:
   using: "node16"
   main: "./dist/index.js"
