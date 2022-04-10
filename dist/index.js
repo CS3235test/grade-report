@@ -11416,50 +11416,17 @@ exports.run = async (test, cwd) => {
     await runCommand(test, cwd, timeout);
 };
 exports.runAll = async (_tests, _cwd) => {
-    let points = 0;
-    let availablePoints = 0;
-    let hasPoints = false;
+    let points = Number(core.getInput('score'));
+    let availablePoints = Number(core.getInput('fullscore'));
     // https://help.github.com/en/actions/reference/development-tools-for-github-actions#stop-and-start-log-commands-stop-commands
     const token = uuid_1.v4();
     log('');
     log(`::stop-commands::${token}`);
     log('');
-    let failed = false;
-    //for (const test of tests) {
-    //try {
-    //if (test.points) {
-    //hasPoints = true
-    //availablePoints += test.points
-    //}
-    //log(color.cyan(`📝 ${test.name}`))
-    //log('')
-    //await run(test, cwd)
-    //log('')
-    //log(color.green(`✅ ${test.name}`))
-    //log(``)
-    //if (test.points) {
-    //points += test.points
-    //}
-    //} catch (error) {
-    //failed = true
-    //log('')
-    //log(color.red(`❌ ${test.name}`))
-    //if(error instanceof Error){
-    //core.setFailed(error.message)
-    //}
-    //}
-    //}
-    availablePoints += 100;
-    let score = Number(core.getInput('score'));
-    points += score;
-    hasPoints = true;
     // Restart command processing
     log('');
     log(`::${token}::`);
-    if (failed) {
-        // We need a good failure experience
-    }
-    else {
+    if (points >= availablePoints) {
         log('');
         log(color.green('All tests passed'));
         log('');
@@ -11467,12 +11434,10 @@ exports.runAll = async (_tests, _cwd) => {
         log('');
     }
     // Set the number of points
-    if (hasPoints) {
-        const text = `Points ${points}/${availablePoints}`;
-        log(color.bold.bgCyan.black(text));
-        core.setOutput('Points', `${points}/${availablePoints}`);
-        await output_1.setCheckRunOutput(text);
-    }
+    const text = `Points ${points}/${availablePoints}`;
+    log(color.bold.bgCyan.black(text));
+    core.setOutput('Points', `${points}/${availablePoints}`);
+    await output_1.setCheckRunOutput(text);
 };
 
 
